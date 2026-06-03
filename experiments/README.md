@@ -1,7 +1,9 @@
 # Additional experiments
 
 Downstream analyses that build on the trained Pheno-MYCN model, reproducing the
-secondary results in the manuscript. **Author: Dr Binghao Chai.**
+secondary results in the manuscript. Authored by **Dr Binghao Chai**, except
+**`shap_analysis/`** and **`gmm_responsibility/`**, which are authored by
+**Dr Olga Fourkioti** (code review and refactoring by Dr Binghao Chai).
 
 These scripts consume intermediate outputs of the main pipeline — per-tile GMM
 responsibilities/attention, cell-level feature tables, cross-validation splits
