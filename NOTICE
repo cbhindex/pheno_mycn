@@ -1,0 +1,75 @@
+Pheno-MYCN
+==========
+
+Pheno-MYCN: interpretable histological phenotype discovery associated with
+MYCN amplification in paediatric neuroblastoma from H&E whole-slide images.
+
+Copyright (C) 2024-2026 Dr Olga Fourkioti and Dr Binghao Chai.
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License v3.0 as published by the Free
+Software Foundation. See the LICENSE file for the full license text.
+
+--------------------------------------------------------------------------------
+Authorship
+--------------------------------------------------------------------------------
+
+Core Pheno-MYCN model and training/inference pipeline
+  Author:        Dr Olga Fourkioti   (https://github.com/olgarithmics)
+  Code review &  Dr Binghao Chai     (https://github.com/cbhindex)
+  refactoring:
+
+Additional experiments (survival analysis, SHAP analysis, latent-space
+characterisation, GMM-responsibility profiling, cell-level statistics)
+  Author:        Dr Binghao Chai     (https://github.com/cbhindex)
+
+--------------------------------------------------------------------------------
+Third-party components and their provenance
+--------------------------------------------------------------------------------
+
+This project builds on, adapts, or interoperates with the following works.
+Their original licenses apply to the corresponding code and continue to govern
+the portions derived from them.
+
+* CLAM — Clustering-constrained Attention Multiple-instance Learning
+  Mahmood Lab. License: GPL-3.0.
+  https://github.com/mahmoodlab/CLAM
+  The attention-MIL backbone (CLAM_SB / CLAM_MB), the whole-slide-image
+  utilities (`visualization/wsi_core`, `visualization/vis_utils`), and the
+  heatmap/preset machinery are derived from CLAM. Pheno-MYCN is distributed
+  under GPL-3.0 in compliance with this lineage.
+
+* TransMIL — Transformer-based Correlated MIL
+  Shao et al., NeurIPS 2021.
+  https://github.com/szc19990412/TransMIL
+  Used as a baseline classifier (`pheno_mycn/models/TransMIL.py`).
+
+* DSMIL / dual-stream MIL (MILNet)
+  Li et al., CVPR 2021.
+  https://github.com/binli123/dsmil-wsi
+  Used as a baseline classifier (`pheno_mycn/models/MILNet.py`).
+
+* timm — PyTorch Image Models (optimizer factory: RAdam, Lookahead)
+  Ross Wightman. License: Apache-2.0.
+  https://github.com/huggingface/pytorch-image-models
+  The optimizer factory in `pheno_mycn/optimizers/` is adapted from timm.
+
+* nystrom-attention
+  Phil Wang (lucidrains). License: MIT.
+  https://github.com/lucidrains/nystrom-attention
+  Required by the TransMIL baseline.
+
+* UNI — universal histopathology tile encoder
+  Mahmood Lab.
+  https://github.com/mahmoodlab/UNI
+  Used upstream to produce the 1024-d tile embeddings consumed by Pheno-MYCN.
+
+* HoverNet — nuclear segmentation/classification
+  vqdang. License: MIT.
+  https://github.com/vqdang/hover_net
+  Used upstream to produce the cell-level maps consumed by the cell-level
+  statistics and latent-space experiments.
+
+Each upstream project remains the property of its respective authors. Where this
+repository redistributes adapted source, the original copyright notices are
+retained in the relevant files.

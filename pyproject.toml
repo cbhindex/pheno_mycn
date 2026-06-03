@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pheno-mycn"
+version = "1.0.0"
+description = "Interpretable histological phenotype discovery associated with MYCN amplification in paediatric neuroblastoma."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "GPL-3.0-only" }
+authors = [
+    { name = "Dr Olga Fourkioti" },
+    { name = "Dr Binghao Chai" },
+]
+keywords = [
+    "neuroblastoma", "MYCN", "digital pathology",
+    "multiple-instance learning", "interpretable machine learning",
+    "Gaussian mixture models",
+]
+
+# Minimal dependencies for the model + Lightning-free inference. For the full
+# training pipeline and the experiments see requirements.txt / environment.yml.
+# `addict` is required only to unpickle config objects stored inside the bundled
+# PyTorch-Lightning checkpoint; it is tiny and pure-Python.
+dependencies = [
+    "torch>=1.12",
+    "numpy>=1.21",
+    "pyyaml>=5.4",
+    "addict>=2.4",
+]
+
+[project.optional-dependencies]
+train = [
+    "pytorch-lightning>=1.6,<2.0",
+    "torchmetrics>=0.11,<1.0",
+    "addict>=2.4",
+    "pandas>=1.3",
+    "scikit-learn>=1.0",
+    "nystrom-attention>=0.0.9",
+]
+
+[project.urls]
+"Olga Fourkioti" = "https://github.com/olgarithmics"
+"Binghao Chai" = "https://github.com/cbhindex"
+
+[tool.setuptools]
+packages = [
+    "pheno_mycn",
+    "pheno_mycn.models",
+    "pheno_mycn.datasets",
+    "pheno_mycn.optimizers",
+    "pheno_mycn.losses",
+    "pheno_mycn.utils",
+]
+
+[tool.setuptools.package-data]
+"pheno_mycn" = ["configs/*.yaml"]

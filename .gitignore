@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / cache
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Logs and lightning run dirs
+*.log
+neuro_logs/
+lightning_logs/
+wandb/
+
+# Large data and derived artefacts (NOT distributed in this repo)
+# Tile embeddings, whole-slide images, and per-slide inference dumps are
+# patient-derived and/or too large for version control.
+data/wsi_embeddings/
+data/**/*.pt
+data/**/*.h5
+data/**/*.svs
+data/**/*.ndpi
+results/
+*.npy
+
+# Model checkpoints are excluded by default. The single representative
+# plug-and-play checkpoint under plug_and_play/weights/ is tracked via Git LFS
+# (see .gitattributes) and is therefore explicitly re-included below.
+*.ckpt
+*.pth
+*.pt
+!plug_and_play/weights/*.ckpt

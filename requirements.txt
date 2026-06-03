@@ -1,0 +1,21 @@
+# Core Pheno-MYCN dependencies (model, training, and inference).
+#
+# Version ranges below reflect the APIs the code actually uses:
+#   * pytorch-lightning 1.x Trainer API (`gpus=`, `*_epoch_end` hooks)
+#   * torchmetrics >= 0.11 (the `task=` classification API)
+# Pin to exact versions in your environment if you need bit-for-bit
+# reproducibility of the published results.
+
+torch>=1.12
+torchvision>=0.13
+pytorch-lightning>=1.6,<2.0
+torchmetrics>=0.11,<1.0
+nystrom-attention>=0.0.9       # required by the TransMIL baseline
+numpy>=1.21
+pandas>=1.3
+scikit-learn>=1.0
+pyyaml>=5.4
+addict>=2.4
+
+# --- The plug-and-play inference tool only needs `torch` + `numpy` + `pyyaml`.
+#     The packages above are required for (re)training and the Lightning pipeline.

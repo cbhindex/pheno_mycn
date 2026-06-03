@@ -1,0 +1,7 @@
+,train,train_label,val,val_label,test,test_label
+0,SAMPLE0001 HE primary diagnosis,0.0,SAMPLE0007 HE current relapse,1.0,SAMPLE0009 HE primary diagnosis,0.0
+1,SAMPLE0002 HE current relapse,1.0,SAMPLE0008 HE primary diagnosis,0.0,SAMPLE0010 HE current relapse,1.0
+2,SAMPLE0003 HE primary diagnosis,0.0,,,,
+3,SAMPLE0004 HE current relapse,1.0,,,,
+4,SAMPLE0005 HE primary diagnosis,0.0,,,,
+5,SAMPLE0006 HE current relapse,1.0,,,,
