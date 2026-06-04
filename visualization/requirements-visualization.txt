@@ -1,0 +1,17 @@
+# Extra dependencies for the whole-slide visualization scripts in visualization/.
+# Install on top of the core requirements (../requirements.txt).
+#
+# IMPORTANT: openslide-python needs the libopenslide C library, which the pip
+# wheel does NOT bundle. Install it first via conda-forge (recommended):
+#     conda install -c conda-forge openslide-python
+# or via your OS package manager (e.g. `apt install openslide-tools`), then:
+#     pip install -r requirements-visualization.txt
+numpy>=1.21,<2
+scipy>=1.7
+matplotlib>=3.5
+seaborn>=0.12
+umap-learn>=0.5
+h5py>=3.6
+opencv-python-headless>=4.5
+openslide-python>=1.1
+Pillow>=9.0

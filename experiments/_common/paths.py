@@ -8,7 +8,7 @@ Shared path configuration for the additional experiments.
 Every experiment script resolves its inputs/outputs relative to a single
 project root, configurable via the ``PHENO_MYCN_ROOT`` environment variable::
 
-    export PHENO_MYCN_ROOT=/path/to/phyno_mycn
+    export PHENO_MYCN_ROOT=/path/to/pheno_mycn
 
 ``PHENO_MYCN_ROOT`` should point at the working project tree that contains the
 intermediate outputs the experiments consume (these are patient-derived and/or
@@ -25,14 +25,14 @@ too large to ship, so they are NOT included in this repository):
         pheno_mycn_paper/Book 6(Sheet1).csv              # clinical registry
 
 If the variable is unset, the scripts fall back to the placeholder
-``/path/to/phyno_mycn`` and will raise a clear file-not-found error until you
+``/path/to/pheno_mycn`` and will raise a clear file-not-found error until you
 set it. See each script's module docstring for the exact inputs it expects.
 """
 
 import os
 
 #: Root of the working Pheno-MYCN project tree (override with PHENO_MYCN_ROOT).
-PROJECT_ROOT = os.environ.get("PHENO_MYCN_ROOT", "/path/to/phyno_mycn")
+PROJECT_ROOT = os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn")
 
 
 def project_path(*parts):

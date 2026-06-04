@@ -1,6 +1,6 @@
 # Extra dependencies for the additional experiments in experiments/.
 # Install on top of the core requirements (../requirements.txt).
-numpy>=1.21
+numpy>=1.21,<2
 pandas>=1.3
 scipy>=1.7
 scikit-learn>=1.0

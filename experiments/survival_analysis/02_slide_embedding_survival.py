@@ -41,7 +41,7 @@ import umap
 from lifelines import KaplanMeierFitter
 from lifelines.statistics import logrank_test
 
-BASE = os.environ.get("PHENO_MYCN_ROOT", "/path/to/phyno_mycn")
+BASE = os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn")
 SURV = os.path.join(BASE, "additional_exp/survival_analysis")
 COHORT = os.path.join(SURV, "data/survival_per_slide.csv")
 UNI_DIR = os.path.join(BASE, "olga_refactered/data/wsi_embeddings/uni_feats/pt_files")

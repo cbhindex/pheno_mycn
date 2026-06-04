@@ -39,7 +39,7 @@ import shap
 warnings.filterwarnings("ignore")
 
 # ── paths ─────────────────────────────────────────────────────────────────────
-BASE = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/phyno_mycn"), "olga_refactered")
+BASE = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn"), "olga_refactered")
 CSVS = {
     "component3": os.path.join(
         BASE, "results/slide_inference/fold_9/images/prototype_2/features/cell_info_updated.csv"

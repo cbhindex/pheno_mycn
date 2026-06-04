@@ -1,39 +1,47 @@
-# Conda environment for the full Pheno-MYCN repository:
+# Conda environment for the FULL Pheno-MYCN repository:
 # core model + training + visualization + additional experiments.
 #
-#   conda env create -f environment.yml
-#   conda activate pheno-mycn
+# This is the tested, known-good stack (verified on Python 3.10 with an NVIDIA
+# driver supporting CUDA >= 11.8, e.g. an RTX 30-series GPU):
 #
-# GPU users: install the CUDA-matched PyTorch build per https://pytorch.org.
-name: pheno-mycn
+#   conda env create -f environment.yml
+#   conda activate pheno_mycn
+#   pip install -e .          # install the Pheno-MYCN package itself
+#
+# GPU note: the torch wheels below are the CUDA 11.8 build, which runs on most
+# modern NVIDIA drivers. For a different CUDA version, change the
+# --extra-index-url and the +cuXXX suffixes per https://pytorch.org. For a
+# CPU-only install, drop the +cu118 suffixes and the --extra-index-url line.
+name: pheno_mycn
 channels:
   - conda-forge
-  - defaults
 dependencies:
-  - python=3.9
+  - python=3.10
+  - openslide-python        # pulls libopenslide (C library) needed by visualization/
   - pip
   - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu118
       # --- core model / training / inference ---
-      - torch>=1.12
-      - torchvision>=0.13
-      - pytorch-lightning>=1.6,<2.0
-      - torchmetrics>=0.11,<1.0
-      - nystrom-attention>=0.0.9
-      - numpy>=1.21
-      - pandas>=1.3
-      - scikit-learn>=1.0
-      - pyyaml>=5.4
-      - addict>=2.4
-      # --- visualization (whole-slide heatmaps / prototype maps) ---
-      - matplotlib>=3.5
-      - seaborn>=0.12
-      - umap-learn>=0.5
-      - h5py>=3.6
-      - opencv-python>=4.5
-      - openslide-python>=1.1
-      - Pillow>=9.0
-      - scipy>=1.7
+      - torch==2.0.1+cu118
+      - torchvision==0.15.2+cu118
+      - pytorch-lightning==1.9.5      # the training loop uses the Lightning 1.x API
+      - torchmetrics==0.11.4          # provides the `task=` metrics API
+      - "setuptools<81"               # PL 1.x imports pkg_resources, removed in setuptools 81
+      - nystrom-attention             # required by the TransMIL baseline
+      - "numpy<2"                     # the pinned torch/stack is built against numpy 1.x
+      - pandas
+      - scikit-learn
+      - scipy
+      - pyyaml
+      - addict
+      # --- visualization (whole-slide heatmaps / phenotype maps) ---
+      - matplotlib
+      - seaborn
+      - umap-learn
+      - h5py
+      - opencv-python-headless
+      - Pillow
       # --- additional experiments ---
-      - lifelines>=0.27       # survival analysis (Kaplan-Meier, log-rank)
-      - statsmodels>=0.13     # linear mixed-effects models
-      - shap>=0.41            # SHAP feature attribution
+      - lifelines                     # survival analysis (Kaplan-Meier, log-rank)
+      - statsmodels                   # linear mixed-effects models
+      - shap                          # SHAP feature attribution

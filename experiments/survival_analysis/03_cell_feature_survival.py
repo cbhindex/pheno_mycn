@@ -34,7 +34,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.manifold import TSNE
 import umap
 
-BASE   = os.environ.get("PHENO_MYCN_ROOT", "/path/to/phyno_mycn")
+BASE   = os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn")
 SURV   = os.path.join(BASE, "additional_exp/survival_analysis")
 COHORT = os.path.join(SURV, "data/survival_per_slide.csv")
 TILE   = os.path.join(BASE, "olga_refactered/results/cell_analysis/cell_info.csv")

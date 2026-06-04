@@ -18,7 +18,7 @@ All scripts resolve paths from a single project root, set via an environment
 variable (see [`_common/paths.py`](_common/paths.py)):
 
 ```bash
-export PHENO_MYCN_ROOT=/path/to/phyno_mycn
+export PHENO_MYCN_ROOT=/path/to/pheno_mycn
 pip install -r requirements-experiments.txt
 ```
 
@@ -34,15 +34,17 @@ pip install -r requirements-experiments.txt
 
 ## Dependencies
 
-Install the core requirements plus the experiment extras:
+Easiest: the repository's all-in-one conda environment (top-level README,
+Option B) already covers every experiment. Otherwise, from the repository root:
 
 ```bash
-pip install -r ../requirements.txt
-pip install -r requirements-experiments.txt
+pip install -e ".[experiments]"
+# or, with plain requirements files (run from this folder):
+pip install -r ../requirements.txt -r requirements-experiments.txt
 ```
 
 Key extras: `lifelines` (survival), `statsmodels` (mixed-effects models, FDR),
-`shap` (attribution), `umap-learn`, `scikit-learn`, `seaborn`.
+`shap` (attribution), `umap-learn`, `scikit-learn`, `seaborn`. Tested with `numpy<2`.
 
 ## Notes
 

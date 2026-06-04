@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 from lifelines import KaplanMeierFitter
 from lifelines.statistics import logrank_test, multivariate_logrank_test
 
-BASE = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/phyno_mycn"), "additional_exp/survival_analysis")
+BASE = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn"), "additional_exp/survival_analysis")
 COHORT = os.path.join(BASE, "data/survival_per_slide.csv")
 OUT = os.path.join(BASE, "results/km_curves")
 os.makedirs(OUT, exist_ok=True)

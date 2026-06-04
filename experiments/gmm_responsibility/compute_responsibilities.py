@@ -19,7 +19,7 @@ import torch
 import pandas as pd
 
 # ── paths ─────────────────────────────────────────────────────────────────────
-BASE    = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/phyno_mycn"), "olga_refactered")
+BASE    = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn"), "olga_refactered")
 PT_DIR  = os.path.join(BASE, "results/slide_inference/fold_9/pt_outputs")
 CV_CSV  = os.path.join(BASE, "data/cv_splits/neuroblastoma/fold9.csv")
 OUT_DIR = os.path.join(os.path.dirname(__file__), "results")

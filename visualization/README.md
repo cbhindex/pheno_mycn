@@ -27,6 +27,22 @@ cd visualization
 python create_map.py --path_file ... --path_WSI ... --path_graph ... --vis_folder ...
 ```
 
+## Dependencies
+
+These scripts need OpenSlide (with the **libopenslide** C library), OpenCV, h5py,
+matplotlib, seaborn, umap-learn and scipy. The simplest route is the repository's
+all-in-one conda environment (top-level README, Option B), which installs
+libopenslide via conda-forge. Otherwise:
+
+```bash
+conda install -c conda-forge openslide-python     # brings the C library
+pip install -e ".[viz]"                            # from the repository root
+# or: pip install -r requirements-visualization.txt   # (run from this folder)
+```
+
+The pip `openslide-python` wheel alone does **not** include libopenslide, so the
+conda-forge (or `apt install openslide-tools`) step is required.
+
 ## Important: paths are placeholders
 
 All input/output paths in these scripts (and in `heatmap_config_camelyon.yaml`)

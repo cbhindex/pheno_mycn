@@ -24,7 +24,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-BASE = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/phyno_mycn"), "additional_exp/survival_analysis")
+BASE = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn"), "additional_exp/survival_analysis")
 CSV  = os.path.join(BASE, "results/km_curves/km_by_gmm_median_split.csv")
 OUT  = os.path.join(BASE, "results/km_curves")
 

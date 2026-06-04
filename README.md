@@ -75,7 +75,7 @@ data/              Data-format documentation + a synthetic example (no patient d
 
 ### 1. Install
 
-Requirements: Python ≥ 3.8 and PyTorch.
+Requirements: Python 3.10 and PyTorch. Clone the repo, then pick an install path.
 
 > **Pretrained weights (pre-publication):** the trained model-weight files are
 > withheld until the manuscript is published. The code is complete; the
@@ -84,40 +84,51 @@ Requirements: Python ≥ 3.8 and PyTorch.
 
 ```bash
 git clone <this-repo> && cd <this-repo>
+```
 
-# (recommended) an isolated environment
-conda create -n pheno_mycn python=3.10 -y
+**Option A — inference only (minimal).** Just the plug-and-play predictor:
+
+```bash
+conda create -n pheno_mycn python=3.10 -y && conda activate pheno_mycn
+pip install -e .          # installs torch, numpy, pyyaml, addict
+```
+
+For GPU, install the PyTorch build matching your driver from https://pytorch.org
+**before** `pip install -e .` (e.g. `pip install torch --index-url https://download.pytorch.org/whl/cu118`),
+then verify with `python -c "import torch; print(torch.cuda.is_available())"`.
+
+**Option B — full environment (training + experiments + visualization).**
+Recommended. Uses the tested, known-good stack and installs the libopenslide C
+library via conda:
+
+```bash
+conda env create -f environment.yml      # creates the `pheno_mycn` env
 conda activate pheno_mycn
-
-# install the package + run the pretrained model
 pip install -e .
 ```
 
-`pip install -e .` pulls only the **minimal** runtime dependencies — `torch`,
-`numpy`, `pyyaml`, `addict` — which is all you need for prediction.
-
-For GPU acceleration, install the PyTorch build that matches **your** CUDA driver
-**before** `pip install -e .`, using the selector at https://pytorch.org. For
-example, on a CUDA 12.1 driver:
+Or add just the extras you need on top of a base install (the `viz` extra also
+needs the libopenslide **system** library — install it via conda-forge as in
+`environment.yml`, or `apt install openslide-tools`):
 
 ```bash
-pip install torch --index-url https://download.pytorch.org/whl/cu121
-pip install -e .
+pip install -e ".[train]"                    # training pipeline
+pip install -e ".[experiments]"              # survival / SHAP / latent-space / cell-stats
+pip install -e ".[viz]"                      # whole-slide heatmaps / phenotype maps
+pip install -e ".[train,experiments,viz]"    # everything
 ```
 
-Pick the `cuXXX` channel for your driver (`nvidia-smi` shows the maximum CUDA
-version it supports). The model then uses the GPU automatically — verify with
-`python -c "import torch; print(torch.cuda.is_available())"`. (A bare
-`pip install -e .` also works, but may fetch a CUDA build newer than your driver
-supports, in which case CUDA falls back to unavailable.)
+<details><summary><b>Tested environment (known-good)</b></summary>
 
-For the **full pipeline** (training, baselines, metrics) add the extras, or use
-the all-in-one conda environment that also covers visualization and experiments:
+Python 3.10 · torch 2.0.1+cu118 · torchvision 0.15.2 · pytorch-lightning 1.9.5 ·
+torchmetrics 0.11.4 · `setuptools<81` · numpy 1.26.4 · pandas · scikit-learn ·
+scipy · nystrom-attention · matplotlib · seaborn · umap-learn · h5py ·
+opencv-python-headless · openslide-python (conda-forge) · lifelines · statsmodels · shap
 
-```bash
-pip install -e ".[train]"          # or: pip install -r requirements.txt
-conda env create -f environment.yml   # all-in-one alternative
-```
+Two constraints are baked into the env files: **(1)** PyTorch Lightning 1.x imports
+`pkg_resources`, so **`setuptools<81`** is required; **(2)** the pinned stack
+expects **`numpy<2`**.
+</details>
 
 ### 2. Predict — command line
 
