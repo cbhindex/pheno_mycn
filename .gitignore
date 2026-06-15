@@ -49,6 +49,11 @@ data/**/*.svs
 data/**/*.ndpi
 results/
 *.npy
+*.npz
+
+# Patient-derived experiment intermediates relocated from additional_exp/
+# (cohort tables with patient_id/age/dates, cached embeddings) — never committed.
+experiments/**/data/
 
 # Model checkpoints and saved tensors.
 *.ckpt

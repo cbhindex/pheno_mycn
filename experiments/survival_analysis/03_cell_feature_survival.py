@@ -35,10 +35,10 @@ from sklearn.manifold import TSNE
 import umap
 
 BASE   = os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn")
-SURV   = os.path.join(BASE, "additional_exp/survival_analysis")
+SURV   = os.path.dirname(os.path.abspath(__file__))
 COHORT = os.path.join(SURV, "data/survival_per_slide.csv")
 TILE   = os.path.join(BASE, "olga_refactered/results/cell_analysis/cell_info.csv")
-GMM    = os.path.join(BASE, "additional_exp/gmm_responsibility/results/per_slide_stats.csv")
+GMM    = os.path.join(SURV, "..", "gmm_responsibility/results/per_slide_stats.csv")
 RES    = os.path.join(SURV, "results/cell_feature_maps")
 os.makedirs(RES, exist_ok=True)
 

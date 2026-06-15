@@ -42,12 +42,12 @@ from lifelines import KaplanMeierFitter
 from lifelines.statistics import logrank_test
 
 BASE = os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn")
-SURV = os.path.join(BASE, "additional_exp/survival_analysis")
+SURV = os.path.dirname(os.path.abspath(__file__))
 COHORT = os.path.join(SURV, "data/survival_per_slide.csv")
 UNI_DIR = os.path.join(BASE, "olga_refactered/data/wsi_embeddings/uni_feats/pt_files")
 OUT_DIR = os.path.join(BASE, "olga_refactered/results/slide_inference/fold_9/pt_outputs")
-GMM_CSV = os.path.join(BASE,
-    "additional_exp/gmm_responsibility/results/per_slide_stats.csv")
+GMM_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+    "..", "gmm_responsibility/results/per_slide_stats.csv")
 RES = os.path.join(SURV, "results/slide_embedding_maps")
 os.makedirs(RES, exist_ok=True)
 

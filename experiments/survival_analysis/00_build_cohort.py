@@ -30,7 +30,7 @@ import pandas as pd
 BASE = os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn")
 BOOK6 = os.path.join(BASE, "pheno_mycn_paper/Book 6(Sheet1).csv")
 FOLD0 = os.path.join(BASE, "olga_refactered/data/cv_splits/neuroblastoma/fold0.csv")
-OUT_DIR = os.path.join(BASE, "additional_exp/survival_analysis/data")
+OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 os.makedirs(OUT_DIR, exist_ok=True)
 
 log_lines = []

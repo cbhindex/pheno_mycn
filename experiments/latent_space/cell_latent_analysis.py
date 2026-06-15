@@ -52,11 +52,17 @@ warnings.filterwarnings("ignore")
 # ── paths ─────────────────────────────────────────────────────────────────────
 BASE = os.path.join(os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn"), "olga_refactered")
 CSVS = {
+    "component2": os.path.join(
+        BASE, "results/slide_inference/fold_9/images/prototype_1/features/cell_info_updated.csv"
+    ),
     "component3": os.path.join(
         BASE, "results/slide_inference/fold_9/images/prototype_2/features/cell_info_updated.csv"
     ),
     "component5": os.path.join(
         BASE, "results/slide_inference/fold_9/images/prototype_4/features/cell_info_updated.csv"
+    ),
+    "component6": os.path.join(
+        BASE, "results/slide_inference/fold_9/images/prototype_5/features/cell_info_updated.csv"
     ),
 }
 OUT_DIR = os.path.join(os.path.dirname(__file__), "results")

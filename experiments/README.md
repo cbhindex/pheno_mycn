@@ -51,5 +51,7 @@ Key extras: `lifelines` (survival), `statsmodels` (mixed-effects models, FDR),
 - These are exploratory analyses run on a small single-centre cohort; the
   survival results in particular are descriptive (see the script docstrings and
   the manuscript for the appropriate caveats).
-- Outputs are written under each experiment's `results/` subfolder (or, for the
-  survival scripts, under `$PHENO_MYCN_ROOT/additional_exp/survival_analysis/`).
+- Outputs are written under each experiment's own `results/` subfolder; the
+  survival scripts also read patient-derived intermediates from
+  `survival_analysis/data/` and `gmm_responsibility/results/`. Both `results/`
+  and `experiments/**/data/` are git-ignored (never committed).

@@ -23,9 +23,9 @@ from lifelines import KaplanMeierFitter
 from lifelines.statistics import logrank_test, multivariate_logrank_test
 
 BASE   = os.environ.get("PHENO_MYCN_ROOT", "/path/to/pheno_mycn")
-SURV   = os.path.join(BASE, "additional_exp/survival_analysis")
+SURV   = os.path.dirname(os.path.abspath(__file__))
 COHORT = os.path.join(SURV, "data/survival_per_slide.csv")
-GMM    = os.path.join(BASE, "additional_exp/gmm_responsibility/results/per_slide_stats.csv")
+GMM    = os.path.join(SURV, "..", "gmm_responsibility/results/per_slide_stats.csv")
 OUT    = os.path.join(SURV, "results/km_curves")
 os.makedirs(OUT, exist_ok=True)
 
