@@ -1,32 +1,18 @@
-"""
-Auxiliary Gaussian mixture model (GMM) phenotype branch for Pheno-MYCN.
+"""Auxiliary Gaussian mixture model (GMM) phenotype branch for Pheno-MYCN.
 
-This module implements ``MILWithLearnableAnomalyDetection``, the auxiliary branch
-that turns a bag of tile embeddings into an interpretable, MYCN-associated
-phenotype space. A diagonal-covariance Gaussian mixture with ``num_components``
-components (K) is fitted on projected tile embeddings from MYCN-amplified
-training cases via a small number of MAP Expectation-Maximisation (EM) steps,
-and then applied to tiles from both molecular subtypes:
+Implements ``MILWithLearnableAnomalyDetection``: a diagonal-covariance GMM with
+``num_components`` (K) fitted on projected tile embeddings from MYCN-amplified
+training cases via a few MAP-EM steps, then applied to tiles of both subtypes.
+During training (label == 1) it returns the GMM free-energy (an auxiliary
+regulariser) plus per-tile soft responsibilities ``qq``; at inference it returns
+the per-tile anomaly score and ``qq``.
 
-  * during training (label == 1): returns the GMM free-energy (used as an
-    auxiliary regulariser) together with the per-tile soft responsibilities;
-  * at inference: returns the per-tile anomaly score (free-energy) and the
-    per-tile soft responsibilities ``qq`` over the K components.
+``qq`` and its hard arg-max labels are the phenotype representation analysed in
+the manuscript (Components 1..K). The mixture parameters (``mu``, ``V_``,
+``phi``) have ``requires_grad=False``: ProtoDiv-initialised (see
+``model_interface``) and updated in closed form by the MAP M-step, not back-prop.
 
-The soft responsibilities ``qq`` and their hard arg-max labels are the
-phenotype representation analysed throughout the manuscript (Components 1..K).
-The mixture parameters (``mu``, ``V_``, ``phi``) are registered as buffers-like
-parameters with ``requires_grad=False``: they are updated in closed form by the
-MAP M-step rather than by gradient descent, and they are initialised from
-ProtoDiv clustering in the training loop (see ``model_interface``).
-
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:                     Dr Olga Fourkioti   (https://github.com/olgarithmics)
-Code review & refactoring:  Dr Binghao Chai     (https://bhchai.com/, https://github.com/cbhindex)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti. Refactoring: Dr Binghao Chai. License: GPL-3.0.
 """
 
 import torch

@@ -7,13 +7,7 @@ together with the slide-level MYCN label. Train / val / test membership and
 labels are read from a per-fold cross-validation CSV (see ``data/README.md`` for
 the expected schema).
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:                     Dr Olga Fourkioti   (https://github.com/olgarithmics)
-Code review & refactoring:  Dr Binghao Chai     (https://bhchai.com/, https://github.com/cbhindex)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti. Refactoring: Dr Binghao Chai. License: GPL-3.0.
 """
 
 import random

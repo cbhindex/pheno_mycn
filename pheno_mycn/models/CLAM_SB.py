@@ -1,28 +1,17 @@
-"""
-CLAM-SB backbone with the auxiliary GMM phenotype branch — the Pheno-MYCN model.
+"""CLAM-SB backbone with the auxiliary GMM phenotype branch — the Pheno-MYCN model.
 
-This is the core Pheno-MYCN network. It couples a single-branch
-Clustering-constrained Attention MIL (CLAM-SB) classifier for slide-level MYCN
-prediction with the auxiliary Gaussian mixture model branch
-(``MILWithLearnableAnomalyDetection``) that defines the interpretable,
-MYCN-associated tile-level phenotype space.
+Couples a single-branch Clustering-constrained Attention MIL (CLAM-SB) classifier
+for slide-level MYCN prediction with the auxiliary GMM branch
+(``MILWithLearnableAnomalyDetection``) defining the interpretable, MYCN-associated
+tile-level phenotype space. ``forward`` returns a dict with the slide-level
+logits/probabilities, attention scores, per-tile GMM responsibilities
+(``gmm_sores``), projected GMM features and the auxiliary GMM energy.
 
-The attention-MIL backbone is adapted from CLAM (Mahmood Lab, GPL-3.0):
-https://github.com/mahmoodlab/CLAM. The GMM phenotype branch and its
-integration are the Pheno-MYCN contribution.
+Attention-MIL backbone adapted from CLAM (Mahmood Lab, GPL-3.0,
+https://github.com/mahmoodlab/CLAM); the GMM branch and its integration are the
+Pheno-MYCN contribution.
 
-The ``forward`` pass returns, in a single dict, the slide-level logits /
-probabilities, the attention scores, the per-tile GMM responsibilities
-(``gmm_sores``), the projected GMM features, and the auxiliary GMM energy.
-
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:                     Dr Olga Fourkioti   (https://github.com/olgarithmics)
-Code review & refactoring:  Dr Binghao Chai     (https://bhchai.com/, https://github.com/cbhindex)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
-Portions adapted from CLAM (Mahmood Lab, GPL-3.0).
+Author: Dr Olga Fourkioti. Refactoring: Dr Binghao Chai. License: GPL-3.0.
 """
 
 import torch
@@ -111,11 +100,9 @@ class CLAM_SB(nn.Module):
         subtyping: whether this is a subtyping problem.
 
     Note:
-        The original research code hard-coded ``l = 6`` inside ``__init__``,
-        which silently ignored the constructor argument. That line has been
-        removed so that ``l`` (the number of GMM components) is honoured as
-        passed from the config. With the published config (``l: 6``) the model
-        is identical to the one that produced the bundled K=6 weights.
+        The original research code hard-coded ``l = 6`` in ``__init__``, silently
+        ignoring this argument; that line was removed so ``l`` is honoured. With
+        the published config (``l: 6``) the model matches the bundled K=6 weights.
     """
 
     def __init__(self, l, gate=True, size_arg="small", dropout=False, k_sample=2, n_classes=2,

@@ -77,9 +77,6 @@ class Wsi_Region(Dataset):
                 center_shift = 0.5
             else:
                 center_shift = 0.625
-            #center_shift = 0.375 # 25% overlap
-            #center_shift = 0.625 #50%, 75% overlap
-            #center_shift = 1.0 #95% overlap
         
         filtered_coords = []
         #iterate through tissue contours for valid patch coordinates

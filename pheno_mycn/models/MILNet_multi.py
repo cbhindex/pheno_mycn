@@ -10,13 +10,7 @@ https://github.com/binli123/dsmil-wsi.
 The returned dict mirrors the Pheno-MYCN model so the shared training/inference
 loop can drive it interchangeably; auxiliary-GMM fields are placeholders.
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:                     Dr Olga Fourkioti   (https://github.com/olgarithmics)
-Code review & refactoring:  Dr Binghao Chai     (https://bhchai.com/, https://github.com/cbhindex)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti. Refactoring: Dr Binghao Chai. License: GPL-3.0.
 """
 
 import torch

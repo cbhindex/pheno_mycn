@@ -11,12 +11,7 @@ https://github.com/mahmoodlab/CLAM. The default paths below are placeholders —
 point ``--classic_feat_csv`` / ``--save_name`` and ``image_root`` at your own
 cell-feature table and the corresponding tile-image folder.
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:  Dr Olga Fourkioti  (https://github.com/olgarithmics)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti (https://github.com/olgarithmics). License: GPL-3.0.
 """
 
 from __future__ import print_function
@@ -173,21 +168,6 @@ if __name__ == '__main__':
         classic_df = pd.DataFrame(classic_feats_list, columns=classic_columns)
 
         classic_df = classic_df.dropna(axis=1, how='all')
-        #
-        # # 2️⃣ (Optional) Drop features with too many missing values
-        # classic_df = classic_df.loc[:, classic_df.isnull().mean() < 0.5]
-        #
-        # # 3️⃣ Fill remaining NaNs
-        # classic_df = classic_df.fillna(classic_df.median(numeric_only=True))
-
-
-        #classic_df = classic_df.fillna(classic_df.median())
-        #classic_df = classic_df.loc[:, classic_df.std() > 0]
-
-
-        # Standardize
-        #classic_scaled = pd.DataFrame(StandardScaler().fit_transform(classic_df), columns=classic_df.columns)
-
 
         return classic_df
 
@@ -239,8 +219,6 @@ if __name__ == '__main__':
     plt.bar(top_classic_diff['Feature'], top_classic_diff['T-stat'], color='indianred')
     plt.xticks(rotation=45, ha='right')
     plt.ylabel('T-statistic')
-    #plt.title('Top Differentiating Classical Features (MYC+ vs Non-MYC)')
-    #plt.savefig("top_feat_proto_2.png", dpi=300, bbox_inches='tight')
     plt.grid(True)
     plt.tight_layout()
     plt.show()
@@ -254,8 +232,6 @@ if __name__ == '__main__':
 
     labels = [1] * len(myc_top_feats) + [0] * len(non_myc_top_feats)  # 1=MYC+, 0=MYC−
     combined_top_feats = combined_top_feats.fillna(combined_top_feats.median())
-
-    #combined_top_feats = combined_top_feats.dropna(axis=1)
 
     from sklearn.linear_model import LogisticRegression
     from sklearn.preprocessing import StandardScaler
@@ -285,15 +261,6 @@ if __name__ == '__main__':
     # Sort by SHAP value and print top N
     top_n = 20
     shap_df_sorted = shap_df.sort_values(by='Mean |SHAP value|', ascending=False).reset_index(drop=True)
-
-
-
-    # shap.plots.heatmap(shap_values, max_display=20, show=False)
-    # plt.savefig("shap_hetamap_proto_2.png", dpi=300, bbox_inches='tight')
-    # plt.close()
-    # shap.plots.violin(shap_values, feature_names=combined_top_feats.columns, plot_type="layered_violin", show=False)
-    # plt.savefig("shap_violin_proto_2.png", dpi=300, bbox_inches='tight')
-    # plt.close()
 
 
 

@@ -19,13 +19,7 @@ The model class is selected by ``Model.name`` in the YAML config (CLAM_SB =
 Pheno-MYCN, TransMIL, MILNet_multi). ``--l`` sets the number of GMM components K
 (the manuscript uses K=6).
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:                     Dr Olga Fourkioti   (https://github.com/olgarithmics)
-Code review & refactoring:  Dr Binghao Chai     (https://bhchai.com/, https://github.com/cbhindex)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti. Refactoring: Dr Binghao Chai. License: GPL-3.0.
 """
 
 import argparse

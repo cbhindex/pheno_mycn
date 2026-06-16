@@ -168,7 +168,6 @@ class WholeSlideImage(object):
         self.contours_tissue = self.scaleContourDim(foreground_contours, scale)
         self.holes_tissue = self.scaleHolesDim(hole_contours, scale)
 
-        #exclude_ids = [0,7,9]
         if len(keep_ids) > 0:
             contour_ids = set(keep_ids) - set(exclude_ids)
         else:
@@ -573,8 +572,6 @@ class WholeSlideImage(object):
             scores = to_percentiles(scores)
             scores /= 100
 
-        #scores /= 100
-
         overlay = np.full(np.flip(region_size), 0).astype(float)
         counter = np.full(np.flip(region_size), 0).astype(np.uint16)      
         count = 0
@@ -617,9 +614,7 @@ class WholeSlideImage(object):
             img = np.array(self.wsi.read_region(top_left, vis_level, region_size).convert("RGB"))
         else:
             # use blank canvas
-            img = np.array(Image.new(size=region_size, mode="RGB", color=(255,255,255))) 
-
-        #return Image.fromarray(img) #raw image
+            img = np.array(Image.new(size=region_size, mode="RGB", color=(255,255,255)))
 
         print('\ncomputing heatmap image')
         print('total of {} patches'.format(len(coords)))
@@ -690,8 +685,6 @@ class WholeSlideImage(object):
         shift = top_left # amount shifted w.r.t. (0,0)
         for x_start in range(top_left[0], bot_right[0], block_size_x * int(downsample[0])):
             for y_start in range(top_left[1], bot_right[1], block_size_y * int(downsample[1])):
-                #print(x_start, y_start)
-
                 # 1. convert wsi coordinates to image coordinates via shift and scale
                 x_start_img = int((x_start - shift[0]) / int(downsample[0]))
                 y_start_img = int((y_start - shift[1]) / int(downsample[1]))
@@ -702,7 +695,6 @@ class WholeSlideImage(object):
 
                 if y_end_img == y_start_img or x_end_img == x_start_img:
                     continue
-                #print('start_coord: {} end_coord: {}'.format((x_start_img, y_start_img), (x_end_img, y_end_img)))
                 
                 # 3. fetch blend block and size
                 blend_block = img[y_start_img:y_end_img, x_start_img:x_end_img] 
@@ -733,7 +725,6 @@ class WholeSlideImage(object):
 
             if use_holes:
                 cv2.drawContours(image=tissue_mask, contours=contours_holes[idx], contourIdx=-1, color=(0), offset=offset, thickness=-1)
-            # contours_holes = self._scaleContourDim(self.holes_tissue, scale, holes=True, area_thresh=area_thresh)
                 
         tissue_mask = tissue_mask.astype(bool)
         print('detected {}/{} of region as tissue'.format(tissue_mask.sum(), tissue_mask.size))

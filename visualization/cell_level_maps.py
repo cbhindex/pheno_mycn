@@ -12,12 +12,7 @@ https://github.com/mahmoodlab/CLAM. The default paths below are placeholders —
 point the ``--classic_feat_csv`` / ``--patch_dir`` / ``--vis_folder`` arguments
 at your own cell-feature tables and saved per-tile outputs.
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:  Dr Olga Fourkioti  (https://github.com/olgarithmics)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti (https://github.com/olgarithmics). License: GPL-3.0.
 """
 
 from __future__ import print_function
@@ -186,8 +181,6 @@ if __name__ == '__main__':
     n_myc_classic_feats = []
 
     for ind, name in enumerate(test_names):
-        # if ind == 20:
-        #     break
         slide_name = filenames['train'][ind]
 
 
@@ -233,16 +226,6 @@ if __name__ == '__main__':
                 deep_feats = feats[index,:]
                 classic_df = classic_feats[classic_feats.iloc[:, 0]  == patch_key]
 
-
-
-                # classic_df = pd.DataFrame(classic_df)
-                # classic_df = classic_df.drop(classic_df.columns[0], axis=1)
-                # deep_df = pd.DataFrame(deep_feats, columns=[f"deep_{i}" for i in range(deep_feats.shape[1])])
-                #
-                # classic_df = (classic_df - classic_df.mean()) / classic_df.std()
-                #
-                # deep_feats = (deep_feats - deep_feats.mean()) / deep_feats.std()
-
                 if deep_feats.shape[0]>0 and classic_df.shape[0]>0:
                         if slide_label == 0:
                              n_myc_classic_feats.append(classic_df)
@@ -267,12 +250,10 @@ if __name__ == '__main__':
             classic_df = classic_df.drop(columns=classic_df.columns[0])
 
         # Clean classical features
-        #classic_df = classic_df.loc[:, classic_df.isna().mean() < 0.6]
         classic_df = classic_df.fillna(classic_df.mean())
         classic_df = classic_df.loc[:, classic_df.std() > 0]
 
         # Clean deep features
-        #deep_df = deep_df.loc[:, deep_df.isna().mean() < 0.6]
         deep_df = deep_df.fillna(deep_df.mean())
         deep_df = deep_df.loc[:, deep_df.std() > 0]
 

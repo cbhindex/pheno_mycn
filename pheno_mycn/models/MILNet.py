@@ -6,13 +6,7 @@ https://github.com/binli123/dsmil-wsi. Provides ``FCLayer`` and ``BClassifier``
 (reused by ``MILNet_multi``) and a binary ``MILNet`` head. ``MILNet_multi`` is
 the variant used as the slide-level MYCN-prediction baseline in the manuscript.
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:                     Dr Olga Fourkioti   (https://github.com/olgarithmics)
-Code review & refactoring:  Dr Binghao Chai     (https://bhchai.com/, https://github.com/cbhindex)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti. Refactoring: Dr Binghao Chai. License: GPL-3.0.
 """
 
 import torch

@@ -16,13 +16,7 @@ Key responsibilities:
 The number of GMM components K is taken from the config (``Model.l``); the
 manuscript fixes K = 6.
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:                     Dr Olga Fourkioti   (https://github.com/olgarithmics)
-Code review & refactoring:  Dr Binghao Chai     (https://bhchai.com/, https://github.com/cbhindex)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti. Refactoring: Dr Binghao Chai. License: GPL-3.0.
 Portions adapted from CLAM (Mahmood Lab, GPL-3.0).
 """
 

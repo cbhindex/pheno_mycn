@@ -1,39 +1,22 @@
-"""
-Plug-and-play inference API for Pheno-MYCN.
+"""Plug-and-play inference API for Pheno-MYCN.
 
-``PhenoMYCNPredictor`` wraps the trained Pheno-MYCN model (CLAM-SB backbone +
-auxiliary K=6 GMM phenotype branch) behind a small, framework-light interface.
-It loads weights directly from the published PyTorch-Lightning checkpoint
-without instantiating Lightning, so a prediction needs only ``torch`` at
-runtime.
+``PhenoMYCNPredictor`` wraps the trained model (CLAM-SB backbone + auxiliary
+K=6 GMM phenotype branch) behind a framework-light interface: it loads weights
+straight from the published PyTorch-Lightning checkpoint without instantiating
+Lightning, so prediction needs only ``torch``.
 
-Given a slide's tile embeddings (UNI features, ``[n_tiles, 1024]``) it returns:
+Given a slide's UNI tile embeddings (``[n_tiles, 1024]``), ``predict`` returns a
+dict with: ``mycn_probability`` (slide-level P(MYCN-amp)), ``predicted_label``
+(0/1), ``responsibilities`` (per-tile soft GMM, ``[n_tiles, K]``; columns =
+manuscript Components 1..K), ``hard_components`` (per-tile 1-indexed arg-max),
+``attention`` (per-tile MIL weights) and ``anomaly_score`` (slide GMM free-energy).
 
-  * ``mycn_probability``  — slide-level P(MYCN-amplified);
-  * ``predicted_label``   — 0 (non-amplified) / 1 (MYCN-amplified);
-  * ``responsibilities``  — per-tile soft GMM responsibilities, ``[n_tiles, K]``
-                            (the columns are manuscript Components 1..K);
-  * ``hard_components``    — per-tile arg-max component, 1-indexed to match the
-                            manuscript;
-  * ``attention``         — per-tile MIL attention weights, ``[n_tiles]``;
-  * ``anomaly_score``     — slide-level GMM free-energy.
-
-Example
--------
->>> import torch
+Example:
 >>> from pheno_mycn import PhenoMYCNPredictor
->>> predictor = PhenoMYCNPredictor.from_pretrained()          # bundled K=6 fold-9 weights
->>> feats = torch.load("SLIDE_uni.pt")                        # [n_tiles, 1024]
->>> out = predictor.predict(feats)
->>> out["mycn_probability"], out["hard_components"][:5]
+>>> predictor = PhenoMYCNPredictor.from_pretrained()     # bundled K=6 fold-9 weights
+>>> out = predictor.predict(torch.load("SLIDE_uni.pt"))  # feats: [n_tiles, 1024]
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:                     Dr Olga Fourkioti   (https://github.com/olgarithmics)
-Code review & refactoring:  Dr Binghao Chai     (https://bhchai.com/, https://github.com/cbhindex)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti. Refactoring: Dr Binghao Chai. License: GPL-3.0.
 """
 
 from pathlib import Path

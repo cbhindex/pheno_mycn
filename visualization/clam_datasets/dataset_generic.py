@@ -124,7 +124,6 @@ class Generic_WSI_Classification_Dataset(Dataset):
 	def filter_df(self, df, filter_dict={}):
 		if len(filter_dict) > 0:
 			filter_mask = np.full(len(df), True, bool)
-			# assert 'label' not in filter_dict.keys()
 			for key, val in filter_dict.items():
 				mask = df[key].isin(val)
 				filter_mask = np.logical_and(filter_mask, mask)

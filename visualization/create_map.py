@@ -16,12 +16,7 @@ https://github.com/mahmoodlab/CLAM. The default paths below are placeholders —
 point the ``--path_file`` / ``--path_WSI`` / ``--path_graph`` / ``--vis_folder``
 arguments at your own data and saved per-tile outputs.
 
-Part of Pheno-MYCN: interpretable histological phenotype discovery associated
-with MYCN amplification in paediatric neuroblastoma.
-
-Author:  Dr Olga Fourkioti  (https://github.com/olgarithmics)
-
-License: GPL-3.0 (see the LICENSE file at the repository root).
+Author: Dr Olga Fourkioti (https://github.com/olgarithmics). License: GPL-3.0.
 """
 
 from __future__ import print_function
@@ -234,7 +229,6 @@ if __name__ == '__main__':
         slide_id = slide_name.replace(data_args.slide_ext, '')
 
         r_slide_save_dir = os.path.join(exp_args.raw_save_dir, exp_args.save_exp_code)
-        #r_slide_save_dir = os.path.join(vis_folder, slide_id)
         os.makedirs(r_slide_save_dir, exist_ok=True)
 
         if os.path.exists(os.path.join(r_slide_save_dir, '{}_att.tiff'.format(slide_id))):
@@ -272,19 +266,7 @@ if __name__ == '__main__':
             print('{}: {}'.format(key, val))
 
         print('Initializing WSI object')
-        # wsi_object = initialize_wsi(slide_path, seg_mask_path=mask_file, seg_params=seg_params,
-        #                             filter_params=filter_params)
 
-        # wsi_ref_downsample = wsi_object.level_downsamples[patch_args.patch_level]
-        #
-        # vis_patch_size = tuple(
-        #     (np.array(patch_size) * np.array(wsi_ref_downsample) * patch_args.custom_downsample).astype(int))
-        #
-        # if vis_params['vis_level'] < 0:
-        #     best_level = wsi_object.wsi.get_best_level_for_downsample(64)
-        #     vis_params['vis_level'] = best_level
-        # vis_params['line_thickness'] = 250
-        #
         file_path = os.path.join(path_graph, slide_id + '.h5')
 
         with h5py.File(file_path, 'r') as h5_file:
@@ -303,19 +285,6 @@ if __name__ == '__main__':
 
         scores = scores.detach().numpy()
 
-        # wsi_kwargs = {'patch_size': patch_size, 'step_size': step_size,
-        #               'custom_downsample': patch_args.custom_downsample, 'level': patch_args.patch_level,
-        #               'use_center_shift': heatmap_args.use_center_shift}
-        #
-        # heatmap_save_name = '{}_blockmap.tiff'.format(slide_id)
-        #
-        # heatmap_1 = drawHeatmap(scores, coords, slide_path, wsi_object=wsi_object, cmap=heatmap_args.cmap,
-        #                         alpha=heatmap_args.alpha,
-        #                         use_holes=True, binarize=False, vis_level=-1, blank_canvas=False,
-        #                         thresh=-1, patch_size=vis_patch_size, convert_to_percentiles=True)
-        #
-        # heatmap_1.save(os.path.join(r_slide_save_dir, '{}_att.tiff'.format(slide_id)), format='TIFF')
-
         probs = torch.load(os.path.join(vis_folder, '{}_gmm.pt'.format(slide_id))).squeeze(0).numpy()
 
         labels = np.argmax(probs, axis=1)
@@ -331,54 +300,6 @@ if __name__ == '__main__':
 
 
         label2color_dict = get_default_cmap(6)
-
-        # heatmap_1 = drawCatHeatmap(labels, coords,
-        #                         label2color_dict,
-        #                         slide_path,
-        #                         wsi_object = wsi_object,
-        #                         alpha=heatmap_args.alpha,
-        #                         use_holes=True,
-        #                         vis_level=-1,
-        #                         blur = False,
-        #                         blank_canvas= True,
-        #                         patch_size = vis_patch_size)
-        #
-        # heatmap_1.save(os.path.join(r_slide_save_dir, '{}_cat_map.tiff'.format(slide_id)), format='TIFF')
-
-        #
-        # top_k = 10
-        # for proto_id in range(probs.shape[1]):
-        #
-        #     # if proto_id != 4:
-        #     #     continue
-        #
-        #     proto_indices = np.where(labels == proto_id)[0]
-        #
-        #     proto_scores = scores[:, proto_indices]
-        #     proto_scores = proto_scores.squeeze(0)
-        #
-        #     num_to_select = min(top_k, len(proto_indices))
-        #     #
-        #     # if num_to_select <  20:
-        #     #     continue
-        #
-        #     top_indices = proto_indices[np.argsort(proto_scores)[::-1][:num_to_select]]
-        #
-        #     for idx, patch_idx in enumerate(top_indices):
-        #         output_data = []
-        #         s_coord = coords[patch_idx]
-        #         s_prob = probs[patch_idx, proto_id]
-        #
-        #         patch = wsi_object.wsi.read_region(tuple(s_coord), patch_args.patch_level, (patch_args.patch_size,
-        #                                                                                     patch_args.patch_size)).convert(
-        #             'RGB')
-        #
-        #         patch_dir = os.path.join(r_slide_save_dir, 'class_{}'.format(str(slide_label)))
-        #         #patch_dir = os.path.join(r_slide_save_dir, 'patches')
-        #         os.makedirs(patch_dir, exist_ok=True)
-        #         proto_slide_save_dir = os.path.join(patch_dir, f'prototype_{proto_id}')
-        #         os.makedirs(proto_slide_save_dir, exist_ok=True)
-        #         patch.save(os.path.join(proto_slide_save_dir, '{}_x_{}_y_{}.png'.format(idx, s_coord[0], s_coord[1])))
 
         def get_features(X):
 
@@ -439,7 +360,6 @@ if __name__ == '__main__':
 
     myc_feats = np.vstack(myc_feats)
     nmyc_feats = np.vstack(nmyc_feats)
-    #
     num_components = myc_probs.shape[1]
     fig, axes = plt.subplots(1, num_components, figsize=(15, 5), sharey=True)
 
@@ -450,7 +370,6 @@ if __name__ == '__main__':
         axes[i].legend()
 
     plt.savefig('gmm_plot_train.png', bbox_inches='tight')
-    #plt.savefig(os.path.join(exp_args.raw_save_dir, 'gmm_plot_val.png') ,bbox_inches='tight')
     plt.show()
 
 
@@ -465,7 +384,7 @@ if __name__ == '__main__':
 
     # Melt DataFrame for Seaborn
     df_melted = responsibility_df.melt(id_vars=['Class'], var_name='Component', value_name='Responsibility')
-    #
+
     # Boxplot
     plt.figure(figsize=(12, 6))
     sns.violinplot(
@@ -477,14 +396,11 @@ if __name__ == '__main__':
         inner="point",  # show means/medians as points
         scale="width"
     )
-    #plt.title("Violin Plot of GMM Responsibilities for MYC+ and MYC- Classes")
     plt.xlabel("Component")
     plt.ylabel("Responsibility")
     plt.legend(title="Class",loc='upper right' )
     plt.savefig('violin_plot_train.png', bbox_inches='tight', dpi=300)
-    #plt.savefig(os.path.join(exp_args.raw_save_dir, 'violin_plot_val.png'), bbox_inches='tight', dpi=300)
     plt.show()
-    #plt.suptitle("Distribution of GMM Responsibilities for Class 0 and Class 1")
 
 
 

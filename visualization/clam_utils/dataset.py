@@ -104,7 +104,6 @@ class GraphDataset(data.Dataset):
         sample['label'] = self.classdict[label]
         sample['id'] = file_name
 
-        # feature_path = os.path.join(self.root, file_name, 'features.pt')
         feature_path = os.path.join(file_path, file_name, 'features.pt')
 
         if os.path.exists(feature_path):
@@ -112,7 +111,6 @@ class GraphDataset(data.Dataset):
         else:
             features = torch.zeros(1, self.feature_dim)
 
-        # adj_s_path = os.path.join(self.root, file_name, 'adj_s.pt')
         adj_s_path = os.path.join(file_path, file_name, 'adj_s.pt')
         if os.path.exists(adj_s_path):
             adj_s = torch.load(adj_s_path, map_location=lambda storage, loc: storage)
@@ -120,10 +118,8 @@ class GraphDataset(data.Dataset):
             print(adj_s_path + ' not exists')
             adj_s = torch.ones(features.shape[0], features.shape[0])
 
-        # features = features.unsqueeze(0)
         sample['image'] = features
         sample['adj_s'] = adj_s  # adj_s.to(torch.double)
-        # return {'image': image.astype(np.float32), 'label': label.astype(np.int64)}
 
         return sample
 
