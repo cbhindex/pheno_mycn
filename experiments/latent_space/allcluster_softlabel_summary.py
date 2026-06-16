@@ -8,8 +8,9 @@ separation across ALL FOUR MYCN-associated clusters (C2,C3,C5,C6), so the
 "every sub-population shifts with MYCN" heterogeneity message fits one A4 panel.
 
 Reads the per-tile soft labels produced by cell_latent_analysis.py and plots,
-per cluster, the per-slide median P(MYCN-amp) for non-amp vs MYCN-amp patients
-(strip + group median).
+per cluster, the per-slide median P(MYCN-amp) for non-amp vs MYCN-amp slides
+(strip + group median). Each point is one slide (tumour sample), the study's
+analysis unit — not one patient.
 
 Output: results/allcluster_softlabel_summary.pdf
 """

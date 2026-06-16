@@ -5,7 +5,11 @@
 """
 Latent space characterisation for Section 2.4 (Chris Bakal approach, 2026-05-27).
 
-Strategy: describe each patient in a new feature space rather than leading with p-values.
+Strategy: describe each tumour sample in a new feature space rather than leading
+with p-values. Chris Bakal's original guidance framed this "per patient"; here it
+is realised at the SLIDE (tumour-sample) level, which is the study's analysis unit
+(some patients contribute both MYCN-amplified and non-amplified slides, and primary
+vs relapse are distinct samples), so every aggregate below is per slide, not per patient.
 
 For each component (C3=prototype_2, C5=prototype_4):
 
@@ -15,10 +19,10 @@ For each component (C3=prototype_2, C5=prototype_4):
   2b. UMAP of tile features — 2D embedding, coloured by class and by soft label.
 
   2c. Per-slide soft label violin — 20 slides (10 non-amp, 10 MYCN-amp), ordered
-       non-amp left / MYCN-amp right. Shows patient-level phenotypic signature.
+       non-amp left / MYCN-amp right. Shows the slide-level phenotypic signature.
 
-  2d. Patient PCA — per-slide mean feature vector (92-dim) projected to 2 PCs.
-       Each dot = one patient; coloured by class. Shows latent patient separation.
+  2d. Slide-level PCA — per-slide mean feature vector (92-dim) projected to 2 PCs.
+       Each dot = one slide; coloured by class. Shows latent slide separation.
 
 Outputs (results/ subfolder):
   component3_umap_by_class.pdf
@@ -255,8 +259,8 @@ for comp_name, csv_path in CSVS.items():
     amp_med   = np.mean([slide_medians[s] for s in amp_slides])
     print(f"  Mean per-slide median soft label: non-amp={noamp_med:.3f}, MYCN-amp={amp_med:.3f}")
 
-    # ── 2d. Patient-level PCA (slide feature profiles) ────────────────────────
-    # Per-slide mean of each scaled feature → 92-dim slide vector
+    # ── 2d. Slide-level PCA (per-slide feature profiles) ──────────────────────
+    # Per-slide mean of each scaled feature → 92-dim slide vector (each dot = one slide)
     slide_vecs  = []
     slide_labels_pca = []
     slide_ids   = []
@@ -310,7 +314,7 @@ header = [
     "=" * 70,
     "LATENT SPACE CHARACTERISATION — Chris Bakal approach (2026-05-27)",
     "Soft label = P(MYCN-amp) from logistic regression (C=0.1, balanced)",
-    "UMAP/PCA of tile features; per-slide violin; patient PCA",
+    "UMAP/PCA of tile features; per-slide violin; slide-level PCA",
     "=" * 70,
 ]
 summary = "\n".join(header + summary_lines)
