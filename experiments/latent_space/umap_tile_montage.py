@@ -62,15 +62,18 @@ NAN_THRESH = 0.50
 N_REGIONS  = 6
 
 
-# NOTE on tile images (verified 2026-06-15):
-#   The Section-2.4 latent-space analysis uses the TIER-2 table under
-#   slide_inference/.../prototype_N/features/ (1465/1574 tiles) — but those tiles
-#   have NO saved patch images and no source WSIs are available to crop them.
-#   The TIER-1 pathology-review table under prototype_analysis/.../features/
-#   (229/382/131/217 tiles) fully matches its overlay/H&E patch images, so the
-#   image-backed montage is built on the TIER-1 set. This is a DIFFERENT (smaller,
-#   highest-confidence) tile set than the main Section-2.4 UMAP — see EXP-2 note
-#   in manuscript_correction.md; final-figure choice deferred to user.
+# NOTE on tile images (CORRECTED 2026-06-16):
+#   This script builds the montage on the TIER-1 pathology-review table under
+#   prototype_analysis/.../features/ (229/382/131/217 tiles), which matches its
+#   overlay/H&E patches. A 2026-06-15 note here WRONGLY claimed the TIER-2
+#   Section-2.4 table (slide_inference/.../prototype_N/features/) had NO saved
+#   images and needed WSIs. In fact the TIER-2 tiles DO have a 1:1 set of saved
+#   patches at slide_inference/fold_9/images/prototype_N/{patches,
+#   patches_cell_property}/<class>/<idx>.png (C2 801, C3 1465, C5 1574, C6 391).
+#   The Fig 4k hero is therefore built directly on the TIER-2 set by
+#   umap_tile_montage_c3_tier2.py (matches the main-grid 4h embedding); this
+#   TIER-1 script is retained only for reference. See TIER2-IMG in
+#   manuscript_correction.md.
 def csv_path(proto):
     return os.path.join(BASE, f"results/prototype_analysis/prototype_{proto}/features/cell_info_updated.csv")
 

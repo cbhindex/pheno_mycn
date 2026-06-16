@@ -56,7 +56,7 @@ for i, (comp, label) in enumerate(CLUSTERS):
         for m in mods:
             n = int((sub["mod"] == m).sum())
             if n:
-                ax.barh(i, sign * n, left=left if sign > 0 else -left - n,
+                ax.barh(i, sign * n, left=left if sign > 0 else -left,
                         color=MOD_COLORS[m], edgecolor="white", height=0.6)
                 left += n
 ax.axvline(0, color="black", lw=0.8)
