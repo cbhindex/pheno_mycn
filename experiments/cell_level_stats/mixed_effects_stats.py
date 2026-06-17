@@ -59,6 +59,7 @@ os.makedirs(OUT_DIR, exist_ok=True)
 
 TOP_N    = 20
 NAN_THRESH = 0.50
+XLIM     = 6.5   # shared symmetric z-axis for all four clusters (max |z| ≈ 5.8) so bars are comparable
 
 
 def parse_meta(index_series):
@@ -183,21 +184,24 @@ for comp_name, csv_path in CSVS.items():
     ax.barh(range(len(labels)), z_vals, color=colours, edgecolor="none", height=0.7)
     for i, (z, s) in enumerate(zip(z_vals, stars)):
         if s:
-            offset = 0.12 if z >= 0 else -0.12
+            offset = 0.15 if z >= 0 else -0.15
             ax.text(z + offset, i, s, va="center",
-                    ha="left" if z >= 0 else "right", fontsize=9)
+                    ha="left" if z >= 0 else "right", fontsize=11)
     ax.set_yticks(range(len(labels)))
-    ax.set_yticklabels(labels, fontsize=8)
+    ax.set_yticklabels(labels, fontsize=10.5)
+    ax.set_xlim(-XLIM, XLIM)                         # shared x-scale → bar lengths comparable across clusters
+    ax.set_ylim(-0.6, len(labels) - 0.4)
+    ax.tick_params(axis="x", labelsize=10.5)
     ax.axvline(0, color="black", linewidth=0.8)
     ax.set_xlabel("Mixed-effects z-statistic  (class fixed effect, n_slides=10 per class)",
-                  fontsize=9)
+                  fontsize=12)
     ax.legend(handles=[
         mpatches.Patch(color="#D94F3D", label="Higher in MYCN-amp"),
         mpatches.Patch(color="#4F74C8", label="Higher in non-amp"),
-    ], fontsize=8, loc="lower right")
-    plt.tight_layout()
-    fig.savefig(os.path.join(OUT_DIR, f"{comp_name}_mixed_effects_top.pdf"),
-                format="pdf", bbox_inches="tight")
+    ], fontsize=10, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2, frameon=False)
+    # fixed plot rectangle (identical across all four clusters) — no tight bbox
+    fig.subplots_adjust(left=0.46, right=0.97, top=0.95, bottom=0.06)
+    fig.savefig(os.path.join(OUT_DIR, f"{comp_name}_mixed_effects_top.pdf"), format="pdf")
     plt.close(fig)
     print(f"  Figure saved: {comp_name}_mixed_effects_top.pdf")
 

@@ -71,8 +71,7 @@ for yi, (mod, disp, feat) in enumerate(ROWS):
             continue
         col = cmap(np.clip((z + VMAX) / (2 * VMAX), 0, 1))
         if sig:
-            ax.scatter(xi, y, s=300, color=col, edgecolors="black", linewidths=1.7, zorder=3)
-            ax.text(xi, y, "*", ha="center", va="center", fontsize=12, fontweight="bold", zorder=4)
+            ax.scatter(xi, y, s=320, color=col, edgecolors="black", linewidths=2.0, zorder=3)
         else:
             ax.scatter(xi, y, s=150, color=col, edgecolors="0.6", linewidths=0.5, alpha=0.5, zorder=3)
 
@@ -92,7 +91,7 @@ cb = fig.colorbar(sm, ax=ax, fraction=0.045, pad=0.02)
 cb.set_label("LME z  (← lower in MYCN-amp   |   higher in MYCN-amp →)", fontsize=8)
 ax.legend(handles=[
     Line2D([0], [0], marker="o", color="w", markerfacecolor="0.7", markeredgecolor="black",
-           markersize=12, label="FDR-significant (*)"),
+           markeredgewidth=2.0, markersize=13, label="FDR-significant (black ring)"),
     Line2D([0], [0], marker="o", color="w", markerfacecolor="0.85", markeredgecolor="0.6",
            markersize=9, alpha=0.6, label="not significant"),
     Line2D([0], [0], marker="x", color="0.8", linestyle="None", markersize=7, label="not in cluster"),

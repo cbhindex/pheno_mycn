@@ -61,6 +61,7 @@ os.makedirs(OUT_DIR, exist_ok=True)
 
 TOP_N = 20          # features to show in figure
 NAN_THRESH = 0.50   # drop columns with >50% NaN in either class
+XLIM_T = 10.5       # shared symmetric t-axis for all four clusters (global max |t| ≈ 9.8) so bars are comparable
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -234,22 +235,27 @@ for comp_name, csv_path in CSVS.items():
     # significance markers
     for i, (t, s) in enumerate(zip(t_vals, stars)):
         if s:
-            offset = 0.15 if t >= 0 else -0.15
+            offset = 0.2 if t >= 0 else -0.2
             ha = "left" if t >= 0 else "right"
-            ax.text(t + offset, i, s, va="center", ha=ha, fontsize=9, color="black")
+            ax.text(t + offset, i, s, va="center", ha=ha, fontsize=11, color="black")
 
     ax.set_yticks(range(len(labels)))
-    ax.set_yticklabels(labels, fontsize=8)
+    ax.set_yticklabels(labels, fontsize=10.5)
+    ax.set_xlim(-XLIM_T, XLIM_T)                      # shared t-scale → bar lengths comparable across clusters
+    ax.set_ylim(-0.6, len(labels) - 0.4)
+    ax.tick_params(axis="x", labelsize=10.5)
     ax.axvline(0, color="black", linewidth=0.8)
-    ax.set_xlabel("Slide-level t-statistic  (Welch, n=10 per class)", fontsize=10)
+    ax.set_xlabel("Slide-level t-statistic  (Welch, n=10 per class)", fontsize=12)
 
     red_patch  = mpatches.Patch(color="#D94F3D", label="Higher in MYCN-amp")
     blue_patch = mpatches.Patch(color="#4F74C8", label="Higher in non-amp")
-    ax.legend(handles=[red_patch, blue_patch], fontsize=8, loc="lower right")
+    ax.legend(handles=[red_patch, blue_patch], fontsize=10,
+              loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2, frameon=False)
 
-    plt.tight_layout()
+    # fixed plot rectangle (identical across all four clusters) — no tight bbox
+    fig.subplots_adjust(left=0.46, right=0.97, top=0.95, bottom=0.06)
     fig_path = os.path.join(OUT_DIR, f"{comp_name}_top_features.pdf")
-    fig.savefig(fig_path, format="pdf", bbox_inches="tight")
+    fig.savefig(fig_path, format="pdf")
     plt.close(fig)
     print(f"\n  Figure saved: {fig_path}")
 
