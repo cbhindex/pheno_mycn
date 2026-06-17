@@ -74,7 +74,13 @@ def clean_label(name, max_len=50):
         if name.lower().startswith(p.lower()):
             name = name[len(p):]
             break
-    name = name.replace("mean of their ", "").strip()
+    # display-only fixes for upstream feature-name typos (the CSV columns are unchanged):
+    #   "Gloabl" → "Global"  (Shannon / Richness / Simpson / Renyi)
+    #   "intesntiy" → "intensity"  (e.g. intesntiy_kurtosis)
+    name = (name.replace("mean of their ", "")
+                .replace("Gloabl", "Global")
+                .replace("intesntiy", "intensity")
+                .strip())
     return name[:max_len - 1] + "…" if len(name) > max_len else name
 
 

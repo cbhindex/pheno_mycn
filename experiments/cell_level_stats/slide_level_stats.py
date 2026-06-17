@@ -31,6 +31,7 @@ Outputs (results/ subfolder):
 
 import os
 import math
+import textwrap
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -85,8 +86,10 @@ def cohens_d(a, b):
     return (np.mean(a) - np.mean(b)) / pooled_sd
 
 
-def clean_label(name, max_len=45):
-    """Shorten feature label for y-axis."""
+def clean_label(name, width=40):
+    """Shorten + wrap a feature label onto two lines when long (no truncation).
+    width=40 keeps short labels on one line and only wraps the long ones, so the
+    text stays inside the fixed left margin — the plot rectangle is unchanged."""
     prefixes = [
         "neuroblast cells: ",
         "immune cells: ",
@@ -97,10 +100,8 @@ def clean_label(name, max_len=45):
         if name.lower().startswith(p.lower()):
             name = name[len(p):]
             break
-    name = name.replace("mean of their ", "").strip()
-    if len(name) > max_len:
-        name = name[:max_len - 1] + "…"
-    return name
+    name = name.replace("mean of their ", "").replace("Gloabl", "Global").strip()
+    return textwrap.fill(name, width=width)
 
 
 def sig_stars(p_fdr):
@@ -245,7 +246,8 @@ for comp_name, csv_path in CSVS.items():
     ax.set_ylim(-0.6, len(labels) - 0.4)
     ax.tick_params(axis="x", labelsize=10.5)
     ax.axvline(0, color="black", linewidth=0.8)
-    ax.set_xlabel("Slide-level t-statistic  (Welch, n=10 per class)", fontsize=12)
+    # short label so it fits centred under the right-shifted axes (no tight-bbox → would clip)
+    ax.set_xlabel("Slide-level Welch t-statistic (n = 10 per class)", fontsize=12)
 
     red_patch  = mpatches.Patch(color="#D94F3D", label="Higher in MYCN-amp")
     blue_patch = mpatches.Patch(color="#4F74C8", label="Higher in non-amp")
