@@ -16,7 +16,6 @@ Positive SHAP → pushes toward MYCN-amp prediction (class 1).
 Negative SHAP → pushes toward non-amp prediction (class 0).
 
 Outputs (results/):
-  component{3,5}_shap_heatmap.pdf     — tiles × top-features SHAP heatmap
   component{3,5}_shap_beeswarm.pdf    — feature importance with direction
   component{3,5}_shap_values.npy      — SHAP values array [n_tiles × n_feats]
   component{3,5}_feature_names.csv    — feature names for the above array
@@ -156,49 +155,11 @@ for comp_name, csv_path in CSVS.items():
     top_features = feat_imp["feature"].head(TOP_N_HEAT).tolist()
     top_idx      = [feat_cols.index(f) for f in top_features]
 
-    # ── SHAP heatmap ──────────────────────────────────────────────────────────
-    # Sort tiles: non-amp first (sorted by SHAP sum ascending), then MYCN-amp (ascending)
-    shap_sum  = shap_vals.sum(axis=1)
-    sort_order = np.concatenate([
-        np.where(y == 0)[0][np.argsort(shap_sum[y == 0])],
-        np.where(y == 1)[0][np.argsort(shap_sum[y == 1])],
-    ])
-    n_nonamp = int((y == 0).sum())
-    n_amp    = int((y == 1).sum())
-
-    shap_plot = shap_vals[sort_order, :][:, top_idx]   # [n_tiles, top_feats]
-    shap_plot = shap_plot.T                             # [top_feats, n_tiles]
-
-    feat_labels = [clean_label(top_features[i]) for i in range(len(top_features))]
-
-    # robust color scale: clip at 5th/95th percentile
-    vmax = np.percentile(np.abs(shap_plot), 95)
-    vmax = max(vmax, 1e-6)
-
-    fig, ax = plt.subplots(figsize=(12, 6))
-    im = ax.imshow(shap_plot, aspect="auto", cmap="RdBu_r",
-                   vmin=-vmax, vmax=vmax, interpolation="nearest")
-    plt.colorbar(im, ax=ax, label="SHAP value\n(+ve → MYCN-amp, −ve → non-amp)",
-                 fraction=0.03, pad=0.02)
-
-    ax.set_yticks(range(len(feat_labels)))
-    ax.set_yticklabels(feat_labels, fontsize=7)
-    ax.set_xlabel("Tiles  (non-amp ← | → MYCN-amp)", fontsize=9)
-    ax.axvline(n_nonamp - 0.5, color="black", linewidth=1.5, linestyle="--", alpha=0.7)
-
-    # class labels at top
-    mid_nonamp = n_nonamp // 2
-    mid_amp    = n_nonamp + n_amp // 2
-    ax.text(mid_nonamp, -0.8, "non-amp", ha="center", va="bottom", fontsize=8,
-            color="#4F74C8", fontweight="bold", transform=ax.transData)
-    ax.text(mid_amp, -0.8, "MYCN-amp", ha="center", va="bottom", fontsize=8,
-            color="#D94F3D", fontweight="bold", transform=ax.transData)
-
-    plt.tight_layout()
-    fig.savefig(os.path.join(OUT_DIR, f"{comp_name}_shap_heatmap.pdf"),
-                format="pdf", bbox_inches="tight")
-    plt.close(fig)
-    print(f"  Heatmap saved: {comp_name}_shap_heatmap.pdf")
+    # ── SHAP heatmap: DROPPED 2026-06-18 (FIG5-OVERLAY) ───────────────────────
+    # The tiles x top-features heatmap was unreadable over ~1,500 tiles and is
+    # redundant with the beeswarm below; the beeswarm, the importance CSV and the
+    # SHAP-values .npy (used by Supp Table tab:shap_supp) are all retained.
+    # (top_features / top_idx, computed above, are still used by the beeswarm.)
 
     # ── SHAP beeswarm / summary ───────────────────────────────────────────────
     # Normalise feature values to [0, 1] per feature for colour mapping

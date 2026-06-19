@@ -56,4 +56,4 @@ results/
 *.ckpt
 *.pth
 *.pt
-!plug_and_play/weights/*.ckpt
+!plug_and_play/weights/pheno_mycn_k6_fold9.ckpt

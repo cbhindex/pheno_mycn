@@ -102,7 +102,7 @@ def km_plot(score, label_set, stat, fname):
     ax.set_ylabel("Survival probability")
     ax.set_ylim(-0.02, 1.02)
     ax.grid(alpha=0.25)
-    ax.legend(loc="lower left", fontsize=8)
+    ax.legend(loc="upper right", fontsize=8)
     plt.tight_layout()
     plt.savefig(os.path.join(OUT, fname + ".pdf"), bbox_inches="tight")
     plt.savefig(os.path.join(OUT, fname + ".png"), dpi=300, bbox_inches="tight")
