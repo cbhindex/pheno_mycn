@@ -13,7 +13,7 @@ Illustrator); tick marks/values retained.
 This is the sole producer of the K-selection summary statistics; the same
 numbers populate Supplementary Table `tab:gmm_k_selection`. The aggregated
 mean ± SD per K is therefore also written to CSV so the table has a single
-canonical source (see manuscript_correction.md, canonical-stat-script rule).
+canonical source (canonical-stat-script rule).
 
 Inputs (resolved under $PHENO_MYCN_ROOT; not shipped — patient-derived):
     olga_refactered/intermediate_outputs/training_checkpoints/

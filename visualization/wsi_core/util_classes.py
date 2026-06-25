@@ -65,7 +65,7 @@ class isInContourV2(Contour_Checking_fn):
 	def __call__(self, pt): 
 		return 1 if cv2.pointPolygonTest(self.cont, (pt[0]+self.patch_size//2, pt[1]+self.patch_size//2), False) >= 0 else 0
 
-# Easy version of 4pt contour checking function - 1 of 4 points need to be in the contour for transformer_k to pass
+# Easy version of 4pt contour checking function - 1 of 4 points need to be in the contour for the patch to pass
 class isInContourV3_Easy(Contour_Checking_fn):
 	def __init__(self, contour, patch_size, center_shift=0.5):
 		self.cont = contour
@@ -88,7 +88,7 @@ class isInContourV3_Easy(Contour_Checking_fn):
 				return 1
 		return 0
 
-# Hard version of 4pt contour checking function - all 4 points need to be in the contour for transformer_k to pass
+# Hard version of 4pt contour checking function - all 4 points need to be in the contour for the patch to pass
 class isInContourV3_Hard(Contour_Checking_fn):
 	def __init__(self, contour, patch_size, center_shift=0.5):
 		self.cont = contour

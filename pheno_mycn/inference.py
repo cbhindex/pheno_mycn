@@ -148,7 +148,7 @@ class PhenoMYCNPredictor:
         out = self.model(bag)  # label is unused at inference
 
         y_prob = out["Y_prob"].squeeze(0)              # [n_classes]
-        responsibilities = out["gmm_sores"].squeeze(0)  # [n_tiles, K]
+        responsibilities = out["gmm_scores"].squeeze(0)  # [n_tiles, K]
         attention = out["scores"].squeeze(0)            # [n_tiles]
         energy = out["anomaly_loss"]
 

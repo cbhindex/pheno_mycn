@@ -109,7 +109,7 @@ if __name__ == '__main__':
     cfg = read_yaml(args.config)
 
     cfg.config = args.config
-    cfg.Model.thresh = args.l
+    cfg.Model.thresh = args.thresh
     cfg.General.gpus = args.gpus
     cfg.General.server = args.stage
     cfg.Data.fold = args.fold

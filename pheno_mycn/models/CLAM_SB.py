@@ -5,7 +5,7 @@ for slide-level MYCN prediction with the auxiliary GMM branch
 (``MILWithLearnableAnomalyDetection``) defining the interpretable, MYCN-associated
 tile-level phenotype space. ``forward`` returns a dict with the slide-level
 logits/probabilities, attention scores, per-tile GMM responsibilities
-(``gmm_sores``), projected GMM features and the auxiliary GMM energy.
+(``gmm_scores``), projected GMM features and the auxiliary GMM energy.
 
 Attention-MIL backbone adapted from CLAM (Mahmood Lab, GPL-3.0,
 https://github.com/mahmoodlab/CLAM); the GMM branch and its integration are the
@@ -228,7 +228,7 @@ class CLAM_SB(nn.Module):
             'Y_hat': Y_hat,
             'anomaly_loss': energy,
             'scores': A,
-            'gmm_sores': qq,
+            'gmm_scores': qq,
             'feats': feats,
         }
         return results_dict

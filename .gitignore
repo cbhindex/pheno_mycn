@@ -65,3 +65,5 @@ experiments/**/data/
 # now. (Deliberately NOT re-included; the release variant re-includes them.)
 plug_and_play/weights/*.ckpt
 plug_and_play/weights/*.csv
+
+experiments/gmm_clustermap/C4_inspect/

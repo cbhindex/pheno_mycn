@@ -14,13 +14,17 @@ Model: feature_value ~ class + (1 | slide_idx)
 This is the statistically correct approach: uses all tile-level data while
 properly modelling the hierarchical structure (tiles nested within slides).
 
-Components: C3 = prototype_2, C5 = prototype_4.
+Components: C2 = prototype_1, C3 = prototype_2, C5 = prototype_4, C6 = prototype_5.
 
 Outputs (results/ subfolder):
+  component2_mixed_effects_stats.csv
   component3_mixed_effects_stats.csv
   component5_mixed_effects_stats.csv
-  component3_mixed_effects_top.pdf    — z-stat bar chart, top 20 features
+  component6_mixed_effects_stats.csv
+  component2_mixed_effects_top.pdf    — z-stat bar chart, top 20 features
+  component3_mixed_effects_top.pdf
   component5_mixed_effects_top.pdf
+  component6_mixed_effects_top.pdf
   mixed_effects_summary.txt
 """
 

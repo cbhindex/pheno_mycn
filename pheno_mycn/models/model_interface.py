@@ -362,7 +362,7 @@ class ModelInterface(pl.LightningModule):
 
         # To export per-tile GMM responsibilities / attention / projected features
         # for the downstream phenotype analyses, save the relevant entries of
-        # ``results_dict`` here (e.g. ``gmm_sores``, ``scores``, ``feats``). See
+        # ``results_dict`` here (e.g. ``gmm_scores``, ``scores``, ``feats``). See
         # the experiments/ scripts for the expected on-disk layout.
 
         return {'logits': logits, 'Y_prob': Y_prob, 'Y_hat': Y_hat, 'label': label}

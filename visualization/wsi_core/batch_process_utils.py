@@ -7,10 +7,10 @@ args:
 	slides (df or array-like): 
 		array-like structure containing list of slide ids, if df, these ids assumed to be
 		stored under the 'slide_id' column
-	seg_params (dict): segmentation paramters 
+	seg_params (dict): segmentation parameters 
 	filter_params (dict): filter parameters
-	vis_params (dict): visualization paramters
-	patch_params (dict): patching paramters
+	vis_params (dict): visualization parameters
+	patch_params (dict): patching parameters
 	use_heatmap_args (bool): whether to include heatmap arguments such as ROI coordinates
 '''
 def initialize_df(slides, seg_params, filter_params, vis_params, patch_params, 

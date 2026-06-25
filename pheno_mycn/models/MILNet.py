@@ -104,6 +104,6 @@ class MILNet(nn.Module):
             'anomaly_loss': 0,
             'max_prediction': max_prediction.unsqueeze(0),
             'scores': C,
-            'gmm_sores': C,
+            'gmm_scores': C,
         }
         return results_dict

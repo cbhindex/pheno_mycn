@@ -13,13 +13,13 @@ data_arguments:
   data_dir: /path/to/neuroblastoma_slides/
   # column name for key in data_dir (if a dict mapping is used)
   data_dir_key: source
-  # csv list containing slide_ids (can additionally have seg/patch paramters, class labels, etc.)
+  # csv list containing slide_ids (can additionally have seg/patch parameters, class labels, etc.)
   process_list:
   # preset file for segmentation/patching
   preset: presets/bwh_biopsy.csv
-  # file extention for slides
+  # file extension for slides
   slide_ext: .svs
-  # label dictionary for str: interger mapping (optional)
+  # label dictionary for str: integer mapping (optional)
   label_dict:
     LUAD: 0
     LUSC: 1
@@ -54,7 +54,7 @@ heatmap_arguments:
   binarize: false
   # binarization threshold: (0, 1)
   binary_thresh: -1
-  # factor for downscaling the heatmap before final dispaly
+  # factor for downscaling the heatmap before final display
   custom_downsample: 1
   cmap: jet
 sample_arguments:

@@ -16,9 +16,9 @@ Positive SHAP → pushes toward MYCN-amp prediction (class 1).
 Negative SHAP → pushes toward non-amp prediction (class 0).
 
 Outputs (results/):
-  component{3,5}_shap_beeswarm.pdf    — feature importance with direction
-  component{3,5}_shap_values.npy      — SHAP values array [n_tiles × n_feats]
-  component{3,5}_feature_names.csv    — feature names for the above array
+  component{2,3,5,6}_shap_beeswarm.pdf    — feature importance with direction
+  component{2,3,5,6}_shap_values.npy      — SHAP values array [n_tiles × n_feats]
+  component{2,3,5,6}_feature_names.csv    — feature names for the above array
   shap_summary.txt
 """
 

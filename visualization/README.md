@@ -55,7 +55,7 @@ have been replaced with `/path/to/...` placeholders. They expect:
   `pheno_mycn/models/model_interface.py`);
 - HoverNet-derived `cell_info` tables for the cell-level scripts.
 
-None of these patient-derived inputs are distributed in this repository (see the
-top-level `README.md` and `data/README.md`). Edit the paths to point at your own
+None of these patient-derived inputs are distributed in this repository (see
+`data/README.md` for the expected formats). Edit the paths to point at your own
 data before running. These are research figure scripts, provided for
 transparency and reproducibility rather than as a turn-key tool.

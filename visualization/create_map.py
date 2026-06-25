@@ -385,7 +385,7 @@ if __name__ == '__main__':
     # Melt DataFrame for Seaborn
     df_melted = responsibility_df.melt(id_vars=['Class'], var_name='Component', value_name='Responsibility')
 
-    # Boxplot
+    # Violin plot
     plt.figure(figsize=(12, 6))
     sns.violinplot(
         x="Component",
@@ -393,7 +393,7 @@ if __name__ == '__main__':
         hue="Class",
         data=df_melted,
         split=True,
-        inner="point",  # show means/medians as points
+        inner="point",  # show individual observations as points
         scale="width"
     )
     plt.xlabel("Component")

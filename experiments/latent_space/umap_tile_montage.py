@@ -23,9 +23,9 @@ Tile-image lookup (index 'class_X|S_x_A_y_B'):
   C2,C5,C6 -> prototype_N/patches_cell_property/class_X/overlay/S_x_A_y_B.png
 
 Outputs (results/):
-  component{2,3,5,6}_umap_tilemontage.pdf
-  component{2,3,5,6}_tile_selection.csv
-  component{2,3,5,6}_umap_softlabel_large.pdf   (enlarged scatter only)
+  component{2,3,5,6}_umap_tilemontage_pathreview.pdf
+  component{2,3,5,6}_tile_selection_pathreview.csv
+  component{2,3,5,6}_umap_softlabel_large_pathreview.pdf   (enlarged scatter only)
 """
 
 import os, warnings
@@ -71,9 +71,8 @@ N_REGIONS  = 6
 #   patches at slide_inference/fold_9/images/prototype_N/{patches,
 #   patches_cell_property}/<class>/<idx>.png (C2 801, C3 1465, C5 1574, C6 391).
 #   The Fig 4k hero is therefore built directly on the TIER-2 set by
-#   umap_tile_montage_c3_tier2.py (matches the main-grid 4h embedding); this
-#   TIER-1 script is retained only for reference. See TIER2-IMG in
-#   manuscript_correction.md.
+#   umap_tile_montage_tier2.py (matches the main-grid 4h embedding); this
+#   TIER-1 script is retained only for reference.
 def csv_path(proto):
     return os.path.join(BASE, f"results/prototype_analysis/prototype_{proto}/features/cell_info_updated.csv")
 

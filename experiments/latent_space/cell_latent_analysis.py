@@ -11,7 +11,7 @@ is realised at the SLIDE (tumour-sample) level, which is the study's analysis un
 (some patients contribute both MYCN-amplified and non-amplified slides, and primary
 vs relapse are distinct samples), so every aggregate below is per slide, not per patient.
 
-For each component (C3=prototype_2, C5=prototype_4):
+For each component (C2=prototype_1, C3=prototype_2, C5=prototype_4, C6=prototype_5):
 
   2a. Soft labels — logistic regression P(MYCN-amp) per tile.
        Positive = tile looks MYCN-amp; near 0.5 = ambiguous; near 0 = non-amp.
@@ -30,8 +30,8 @@ Outputs (results/ subfolder):
   component3_softlabel_violin.pdf
   component3_slide_pca.pdf
   component3_soft_labels.csv
-  component5_*.pdf (same set)
-  component5_soft_labels.csv
+  component2_*.pdf, component5_*.pdf, component6_*.pdf  (same set as component3)
+  component{2,5,6}_soft_labels.csv
   summary.txt
 """
 
@@ -229,7 +229,7 @@ for comp_name, csv_path in CSVS.items():
     # dividing line between classes
     ax.axvline(n_noamp - 0.5, color="black", linewidth=1.2, linestyle="--", alpha=0.6)
 
-    # x-tick labels: "S0", "S1", … coloured by class
+    # x-tick labels: "N<idx>" (non-amp) / "A<idx>" (amp), coloured by class
     ax.set_xticks(range(len(ordered_slides)))
     tick_labels = [f"N{s.split('_')[-1]}" if slide_class[s] == 0
                    else f"A{s.split('_')[-1]}" for s in ordered_slides]

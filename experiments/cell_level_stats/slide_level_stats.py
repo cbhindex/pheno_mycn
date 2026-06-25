@@ -9,10 +9,10 @@ The original t-tests in the manuscript treated ~1,194/271 tiles as independent o
 (Component 3) and ~1,245/329 tiles (Component 5), but all tiles come from 10 slides per class.
 This script recomputes the analysis at the correct unit: slide-level means (n=10 per class).
 
-For each component (C3=prototype_2, C5=prototype_4):
+For each component (C2=prototype_1, C3=prototype_2, C5=prototype_4, C6=prototype_5):
   1. Load cell_info_updated.csv
   2. Parse class and slide index from index column (format: class_X|SLIDE_IDX_x_X_y_Y)
-  3. Drop columns with >50% NaN overall
+  3. Drop columns with >50% NaN in either class
   4. Compute per-slide mean for each feature → 10 slide means per class
   5. Two-sample Welch's t-test on 10 vs 10 slide means
   6. Cohen's d effect size
@@ -20,12 +20,18 @@ For each component (C3=prototype_2, C5=prototype_4):
   8. Save stats CSV, slide means CSV, PDF figure
 
 Outputs (results/ subfolder):
+  component2_slide_level_stats.csv
   component3_slide_level_stats.csv
   component5_slide_level_stats.csv
+  component6_slide_level_stats.csv
+  component2_slide_means.csv
   component3_slide_means.csv
   component5_slide_means.csv
+  component6_slide_means.csv
+  component2_top_features.pdf
   component3_top_features.pdf
   component5_top_features.pdf
+  component6_top_features.pdf
   summary.txt
 """
 

@@ -92,7 +92,7 @@ lines += ["", "PATIENT-LEVEL (dedup by patient_id)", "-" * 40]
 lines += [f"  {c:<42} {v}" for c, v in pat_rows]
 lines += ["",
           "NOTE: cohort/trial name, INSS/INRG stage, institution and year range",
-          "are deferred (EXP-0b). Demographics computed on slides with valid OS;",
+          "are deferred (EXP-0b). Demographics computed on all slides in the survival table;",
           "the full MIL cohort is 189 slides / 86 patients (see cohort_flow.txt)."]
 summary = "\n".join(lines)
 print("\n" + summary)

@@ -14,13 +14,8 @@ training, no PyTorch Lightning required.
 
 | File | Description |
 |------|-------------|
-| `weights/pheno_mycn_k6_fold9.ckpt` | Representative pretrained Pheno-MYCN model: **K = 6** GMM components, cross-validation **fold 9** (released with the publication). |
+| `weights/pheno_mycn_k6_fold9.ckpt` | Pretrained Pheno-MYCN checkpoint (released with the publication; see [Bundled checkpoint](#bundled-checkpoint) below). |
 | `predict.py` | Command-line demo (forwards to the `pheno-mycn` CLI). |
-
-**Why fold 9?** K=6 is the configuration selected in the manuscript, and fold 9
-is the model on which the GMM-responsibility / phenotype analysis was run, so its
-six components correspond to the Components 1–6 discussed in the paper. (The full
-set of 10 folds and the K = 2…9 sweep are not distributed here.)
 
 ## Inputs
 
@@ -63,6 +58,26 @@ out["anomaly_score"]      # float: slide-level GMM free-energy
 ```
 
 To use a different checkpoint, pass `PhenoMYCNPredictor.from_pretrained(ckpt_path=...)`.
+
+## Bundled checkpoint
+
+`weights/pheno_mycn_k6_fold9.ckpt` is a representative pretrained model:
+
+- **Model:** Pheno-MYCN — CLAM-SB attention-MIL backbone + auxiliary GMM
+  phenotype branch.
+- **GMM components:** K = 6 (the configuration selected in the manuscript).
+- **Cross-validation fold:** 9 of 10. This is the model on which the
+  GMM-responsibility / phenotype analysis was run, so its six components
+  correspond to the manuscript's Components 1–6. The remaining folds and the
+  K = 2…9 component sweep are not redistributed here.
+- **Format:** PyTorch-Lightning weights-only checkpoint (`save_weights_only=True`).
+  The network weights live under the `model.` prefix; the loader
+  ([`pheno_mycn/inference.py`](../pheno_mycn/inference.py)) strips this prefix
+  and loads them into a fresh `CLAM_SB`, so no Lightning runtime is required.
+- **Held-out metrics:** per-fold and cross-validation metrics are reported in
+  the manuscript and will be included here (as `weights/fold9_result.csv`) at
+  publication. Until then the weight file and its metrics are withheld from the
+  repository (see the pre-publication `.gitignore`).
 
 ## Notes
 

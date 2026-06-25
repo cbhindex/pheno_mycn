@@ -5,7 +5,7 @@ Implements ``MILWithLearnableAnomalyDetection``: a diagonal-covariance GMM with
 training cases via a few MAP-EM steps, then applied to tiles of both subtypes.
 During training (label == 1) it returns the GMM free-energy (an auxiliary
 regulariser) plus per-tile soft responsibilities ``qq``; at inference it returns
-the per-tile anomaly score and ``qq``.
+the bag-level (slide) anomaly score and ``qq``.
 
 ``qq`` and its hard arg-max labels are the phenotype representation analysed in
 the manuscript (Components 1..K). The mixture parameters (``mu``, ``V_``,

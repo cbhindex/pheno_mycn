@@ -30,7 +30,7 @@ class Wsi_Region(Dataset):
         wsi_object: instance of WholeSlideImage wrapper over a WSI
         top_left: tuple of coordinates representing the top left corner of WSI region (Default: None)
         bot_right tuple of coordinates representing the bot right corner of WSI region (Default: None)
-        level: downsample level at which to prcess the WSI region
+        level: downsample level at which to process the WSI region
         patch_size: tuple of width, height representing the patch size
         step_size: tuple of w_step, h_step representing the step size
         contour_fn (str): 

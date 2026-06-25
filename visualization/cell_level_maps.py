@@ -354,7 +354,7 @@ if __name__ == '__main__':
             )
             results.append({'Feature': feat, 'T-stat': stat, 'P-value': pval})
 
-    # Top 10 by absolute T-stat
+    # Top 20 by absolute T-stat
     top_classic_diff = pd.DataFrame(results).sort_values(by='T-stat', key=abs, ascending=False).head(20)
 
     # Plot

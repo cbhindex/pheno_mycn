@@ -48,6 +48,6 @@ class MILNet_multi(nn.Module):
             'anomaly_loss': 0,
             'max_prediction': max_prediction.unsqueeze(0),
             'scores': logits,
-            'gmm_sores': logits,
+            'gmm_scores': logits,
         }
         return results_dict

@@ -105,7 +105,7 @@ class TransMIL(nn.Module):
             'Y_hat': Y_hat,
             'anomaly_loss': 0,
             'scores': logits,
-            'gmm_sores': logits,
+            'gmm_scores': logits,
             'feats': h,
         }
         return results_dict

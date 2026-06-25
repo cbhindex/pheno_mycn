@@ -124,13 +124,13 @@ class WholeSlideImage(object):
 
             for hole_ids in all_holes:
                 unfiltered_holes = [contours[idx] for idx in hole_ids ]
-                unfilered_holes = sorted(unfiltered_holes, key=cv2.contourArea, reverse=True)
+                unfiltered_holes = sorted(unfiltered_holes, key=cv2.contourArea, reverse=True)
                 # take max_n_holes largest holes by area
-                unfilered_holes = unfilered_holes[:filter_params['max_n_holes']]
+                unfiltered_holes = unfiltered_holes[:filter_params['max_n_holes']]
                 filtered_holes = []
                 
                 # filter these holes
-                for hole in unfilered_holes:
+                for hole in unfiltered_holes:
                     if cv2.contourArea(hole) > filter_params['a_h']:
                         filtered_holes.append(hole)
 

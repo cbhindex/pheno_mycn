@@ -6,7 +6,7 @@
 umap_tile_montage_tier2.py — enlarged soft-label UMAP + real H&E tile callouts,
 on the REAL Tier-2 embeddings, for all four MYCN-associated clusters.
 
-  • C3 → main Fig 4 panel g (hero).
+  • C3 → main Fig 4 panel k (hero).
   • C2, C5, C6 → one supplementary UMAP figure each.
 
 For each cluster this reproduces the EXACT same soft-label UMAP as
@@ -24,7 +24,7 @@ clusters (C2 necrotic, C6 haemorrhagic) the nuclei term is DROPPED — their
 representative morphology is intrinsically necrotic / red-blood-cell, not
 nucleated, so requiring nuclei would misrepresent them.
 
-Tier-2 tiles DO have saved images (see TIER2-IMG in manuscript_correction.md):
+Tier-2 tiles DO have saved images at
 slide_inference/fold_9/images/prototype_N/patches/<class>/<idx>.png.
 
 Outputs (results/): component{2,3,5,6}_umap_tilemontage_tier2.pdf

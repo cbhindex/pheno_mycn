@@ -224,7 +224,7 @@ def StitchPatches(hdf5_file_path, downscale=16, draw_grid=False, bg_color=(0,0,0
     w = w // downscale
     h = h //downscale
     coords = (coords / downscale).astype(np.int32)
-    print('downscaled size for stiching: {} x {}'.format(w, h))
+    print('downscaled size for stitching: {} x {}'.format(w, h))
     print('number of patches: {}'.format(len(dset)))
     img_shape = dset[0].shape
     print('patch shape: {}'.format(img_shape))
@@ -257,7 +257,7 @@ def StitchCoords(hdf5_file_path, wsi_object, downscale=16, draw_grid=False, bg_c
 
     w, h = wsi.level_dimensions[vis_level]
 
-    print('downscaled size for stiching: {} x {}'.format(w, h))
+    print('downscaled size for stitching: {} x {}'.format(w, h))
     print('number of patches: {}'.format(len(coords)))
     
     patch_size = dset.attrs['patch_size']
