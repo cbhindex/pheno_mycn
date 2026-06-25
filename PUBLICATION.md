@@ -10,7 +10,7 @@ release it afterwards.
 |------|-------|--------------------|
 | Trained model weights | `plug_and_play/weights/pheno_mycn_k6_fold9.ckpt` | untracked (`git rm --cached`) + ignored by the pre-publication `.gitignore` |
 | Per-fold test metrics | `plug_and_play/weights/fold9_result.csv` | untracked + ignored by the pre-publication `.gitignore` |
-| Headline quantitative results | `README.md`, `plug_and_play/README.md`, `plug_and_play/weights/README.md` | softened in prose ("reported in the manuscript") |
+| Headline quantitative results | `README.md`, `plug_and_play/README.md` | softened in prose ("reported in the manuscript") |
 
 The **code** (model, training, inference, CLI, experiments, visualization) is not
 confidential and stays in the repository. The weight/metric files remain **on
